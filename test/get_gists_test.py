@@ -11,7 +11,7 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(self, gists[0]["owner"]["id"] != "8328949")
 
     def test_get_gists_for_user(self):
-        token = "bf42cd72b71c9d6c0bee9ac2b00d5b720aef7489"
+        token = "022a03d67f7dc7836a1bc54fbc7e97806cde3883"
         gists = self.git_hub_client.get_gists(token)
         print(gists)
         self.assertTrue(self, gists[0]["owner"]["id"] == "8328949")
