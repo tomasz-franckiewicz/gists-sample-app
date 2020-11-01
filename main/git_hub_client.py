@@ -9,8 +9,14 @@ class GitHubClient:
     def __init__(self, base_url):
         self.gist_base_url = base_url + "/gists"
 
-    def get_gists(self):
-        return json.loads(urllib.request.urlopen(self.gist_base_url).read())
+    def get_gists(self, api_token=None):
+        request = urllib.request.Request(self.gist_base_url)
+
+        if api_token:
+            request.headers = {'Authorization': 'token %s' % api_token}
+
+        response = urllib.request.urlopen(request)
+        return json.loads(response.read())
 
     def get_gist(self, gist_id):
         return json.loads(urllib.request.urlopen(self.gist_base_url + gist_id).read())
