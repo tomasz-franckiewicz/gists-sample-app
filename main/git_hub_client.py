@@ -19,7 +19,7 @@ class GitHubClient:
         return json.loads(response.read())
 
     def get_gist(self, gist_id):
-        return json.loads(urllib.request.urlopen(self.gist_base_url + gist_id).read())
+        return json.loads(urllib.request.urlopen(self.gist_base_url + "/" + gist_id).read())
 
     def create_gist(self, api_token, description, file_name, file_content_base_64, public):
         files = {
