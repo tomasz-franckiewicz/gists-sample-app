@@ -4,16 +4,16 @@ import urllib.request
 
 
 class GitHubClient:
-    base_url = ""
+    gist_base_url = ""
 
     def __init__(self, base_url):
-        self.base_url = base_url
+        self.gist_base_url = base_url + "/gists"
 
     def get_gists(self):
-        return json.loads(urllib.request.urlopen(self.base_url + "/gists").read())
+        return json.loads(urllib.request.urlopen(self.gist_base_url).read())
 
     def get_gist(self, gist_id):
-        return json.loads(urllib.request.urlopen(self.base_url + "/gists/" + gist_id).read())
+        return json.loads(urllib.request.urlopen(self.gist_base_url + gist_id).read())
 
     def create_gist(self, api_token, description, file_name, file_content_base_64, public):
         files = {
@@ -25,7 +25,7 @@ class GitHubClient:
         payload = {"description": description, "files": files, "public": public}
 
         request = urllib.request.Request(
-            url=self.base_url + "/gists",
+            url=self.gist_base_url,
             headers=headers,
             data=json.dumps(payload).encode('utf8')
         )
